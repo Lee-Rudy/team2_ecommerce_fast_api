@@ -41,10 +41,27 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
       - name: Install dependencies
         run: |
           pip install poetry
           poetry install --no-root
 
-      - name: Run tests
-        run: poetry run pytest --cov=app --cov-fail-under=80
+      - name: Run tests with coverage
+        run: |
+          poetry run pytest -v \
+            --cov=app \
+            --cov-report=term-missing \
+            --cov-report=term:skip-covered \
+            --cov-fail-under=80
+      
+      - name: Coverage Summary
+        if: always()
+        run: |
+          echo "==================================="
+          echo "Coverage report completed"
+          echo "==================================="
