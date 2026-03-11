@@ -77,7 +77,9 @@ Lancer le projet avec Docker
 
 Construire et démarrer le conteneur :
 
+# Docker set-up 
 docker compose up --build
+docker compose down
 
 L’API sera accessible sur :
 
@@ -144,3 +146,5 @@ ReDoc :
 Auteur
 
 Projet réalisé par l’équipe Team2 dans le cadre du module d’industrialisation logicielle.
+
+
