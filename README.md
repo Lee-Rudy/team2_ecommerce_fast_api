@@ -54,12 +54,13 @@ team2_ecommerce_fast_api/
 
 Cloner le projet :
 
+
 git clone git@github.com:Lee-Rudy/team2_ecommerce_fast_api.git
 cd team2_ecommerce_fast_api
 
 Installer les dépendances :
 
-poetry install --no-root
+poetry install
 
 Lancer l'application :
 
@@ -76,11 +77,31 @@ Lancer le projet avec Docker
 
 Construire et démarrer le conteneur :
 
+# Docker set-up 
 docker compose up --build
+docker compose down
 
 L’API sera accessible sur :
 
 http://localhost:8000
+
+Docker Image (CI/CD)
+
+Le pipeline GitHub Actions construit automatiquement une image Docker et la publie sur Docker Hub à chaque push sur main.
+
+Docker Hub repository :
+
+https://hub.docker.com/r/geraldinefrancois/team2_ecommerce_fast_api
+
+Image la plus récente :
+
+geraldinefrancois/team2_ecommerce_fast_api:latest
+
+Télécharger et exécuter l'image :
+
+docker pull geraldinefrancois/team2_ecommerce_fast_api:latest
+docker run -p 8000:8000 geraldinefrancois/team2_ecommerce_fast_api:latest
+
 Tests
 
 Exécuter les tests :
@@ -103,7 +124,11 @@ la qualité du code (flake8, black, mypy)
 
 l’exécution des tests
 
+la couverture de tests (≥ 80%)
+
 la construction de l’image Docker
+
+la publication de l’image sur Docker Hub
 
 Le pipeline s’exécute à chaque push et pull request.
 
@@ -121,3 +146,5 @@ ReDoc :
 Auteur
 
 Projet réalisé par l’équipe Team2 dans le cadre du module d’industrialisation logicielle.
+
+
