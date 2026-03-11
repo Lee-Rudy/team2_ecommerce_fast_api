@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install poetry
-          poetry install --no-root
+          poetry install
 
       - name: Lint
         run: poetry run flake8 app tests
@@ -49,7 +49,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install poetry
-          poetry install --no-root
+          poetry install
 
       - name: Run tests with coverage
         run: |
