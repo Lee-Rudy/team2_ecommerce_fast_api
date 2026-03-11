@@ -9,6 +9,10 @@ app = FastAPI(
 # Inclure les routers
 app.include_router(category_router)
 
+
+def build_status() -> dict[str, str]:
+    return {"status": "ok"}
+
 @app.get("/")
 def root():
-    return {"status": "ok"}
+    return build_status()
