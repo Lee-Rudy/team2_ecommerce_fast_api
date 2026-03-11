@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from app.routers.Category import router as category_router
 
+
+# test pour le pipelin ci
 app = FastAPI(
     title="Team2 E-commerce API",
     version="0.1.0",
@@ -9,6 +11,10 @@ app = FastAPI(
 # Inclure les routers
 app.include_router(category_router)
 
+def build_status() -> dict[str, str]:
+    return {"status": "ok"}
+
+
 @app.get("/")
 def root():
-    return {"status": "ok"}
+    return build_status()
