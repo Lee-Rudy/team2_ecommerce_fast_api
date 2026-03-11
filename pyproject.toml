@@ -14,6 +14,9 @@ dependencies = [
     "python-jose[cryptography] (>=3.5.0,<4.0.0)"
 ]
 
+[tool.black]
+target-version = ["py311"]
+line-length = 88
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -26,5 +29,6 @@ dev = [
     "httpx (>=0.28.1,<0.29.0)",
     "flake8 (>=7.3.0,<8.0.0)",
     "black (>=26.3.0,<27.0.0)",
-    "mypy (>=1.19.1,<2.0.0)"
+    "mypy (>=1.19.1,<2.0.0)",
+    "coverage (>=7.13.4,<8.0.0)"
 ]
