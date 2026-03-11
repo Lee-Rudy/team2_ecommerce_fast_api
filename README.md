@@ -1,26 +1,34 @@
-# Team2 E-commerce FastAPI
+# 🛒 Team2 E-commerce FastAPI
 
-API e-commerce développée avec **FastAPI**, **Poetry** et **Docker** dans le cadre du module d’industrialisation logicielle.
+API e-commerce développée avec **FastAPI**, **Poetry** et **Docker** dans le cadre du module d’**industrialisation logicielle**.
 
-Le projet met en place une architecture backend moderne avec gestion des dépendances, conteneurisation et pipeline CI/CD.
+Ce projet met en place une **architecture backend moderne** avec :
 
----
-
-# Technologies utilisées
-
-- Python 3.11
-- FastAPI
-- Poetry
-- Docker / Docker Compose
-- Pytest
-- Flake8
-- Black
-- MyPy
-- GitHub Actions
+- gestion des dépendances avec **Poetry**
+- conteneurisation avec **Docker**
+- automatisation avec **GitHub Actions**
+- tests automatisés et contrôle qualité
 
 ---
 
-# Structure du projet
+# ⚙️ Technologies utilisées
+
+| Technologie | Description |
+|-------------|-------------|
+| Python 3.11 | Langage principal |
+| FastAPI | Framework API moderne |
+| Poetry | Gestion des dépendances |
+| Docker | Conteneurisation |
+| Docker Compose | Orchestration locale |
+| Pytest | Tests automatisés |
+| Flake8 | Analyse statique |
+| Black | Formatage du code |
+| MyPy | Vérification de types |
+| GitHub Actions | Pipeline CI/CD |
+
+---
+
+# 📁 Structure du projet
 
 
 team2_ecommerce_fast_api/
@@ -50,97 +58,83 @@ team2_ecommerce_fast_api/
 
 ---
 
-# Installation avec Poetry
+# 🚀 Installation avec Poetry
 
-Cloner le projet :
+### 1️⃣ Cloner le projet
 
 
 git clone git@github.com:Lee-Rudy/team2_ecommerce_fast_api.git
 cd team2_ecommerce_fast_api
-
-Installer les dépendances :
-
+2️⃣ Installer les dépendances
 poetry install
-
-Lancer l'application :
-
+3️⃣ Lancer l'application
 poetry run uvicorn app.main:app --reload
-
-L’API sera accessible sur :
-
+Accès à l’API
 http://localhost:8000
-
-Documentation interactive :
-
+Documentation interactive
 http://localhost:8000/docs
-Lancer le projet avec Docker
+🐳 Lancer le projet avec Docker
 
-Construire et démarrer le conteneur :
+Construire et démarrer les conteneurs :
 
 docker compose up --build
 
-L’API sera accessible sur :
+L’API sera disponible sur :
 
 http://localhost:8000
+📦 Docker Image (CI/CD)
 
-Docker Image (CI/CD)
+Le pipeline GitHub Actions construit automatiquement une image Docker et la publie sur Docker Hub à chaque push sur la branche main.
 
-Le pipeline GitHub Actions construit automatiquement une image Docker et la publie sur Docker Hub à chaque push sur main.
-
-Docker Hub repository :
-
+Repository Docker Hub
 https://hub.docker.com/r/geraldinefrancois/team2_ecommerce_fast_api
-
-Image la plus récente :
-
+Image la plus récente
 geraldinefrancois/team2_ecommerce_fast_api:latest
-
-Télécharger et exécuter l'image :
-
+Télécharger et exécuter l'image
 docker pull geraldinefrancois/team2_ecommerce_fast_api:latest
 docker run -p 8000:8000 geraldinefrancois/team2_ecommerce_fast_api:latest
-
-Tests
+🧪 Tests
 
 Exécuter les tests :
 
 poetry run pytest
-Qualité du code
+🔎 Qualité du code
 
 Vérifier la qualité du code :
 
 poetry run flake8
 poetry run black --check .
 poetry run mypy .
-CI/CD
+🔄 CI/CD
 
 Le pipeline GitHub Actions vérifie automatiquement :
 
-l’installation des dépendances
+installation des dépendances
 
-la qualité du code (flake8, black, mypy)
+qualité du code (flake8, black, mypy)
 
-l’exécution des tests
+exécution des tests
 
-la couverture de tests (≥ 80%)
+couverture de tests (≥ 80%)
 
-la construction de l’image Docker
+construction de l’image Docker
 
-la publication de l’image sur Docker Hub
+publication sur Docker Hub
 
-Le pipeline s’exécute à chaque push et pull request.
+Le pipeline s’exécute automatiquement à chaque :
 
-API Documentation
+push
+
+pull request
+
+📚 Documentation API
 
 FastAPI génère automatiquement la documentation :
 
-Swagger UI :
-
+Swagger UI
 /docs
-
-ReDoc :
-
+ReDoc
 /redoc
-Auteur
+👥 Auteur
 
-Projet réalisé par l’équipe Team2 dans le cadre du module d’industrialisation logicielle.
+Projet réalisé par Team2 dans le cadre du module d’industrialisation logicielle.
