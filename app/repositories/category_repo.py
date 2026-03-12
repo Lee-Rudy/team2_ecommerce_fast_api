@@ -29,3 +29,11 @@ class CategoryRepo:
         self.db.delete(category)
         self.db.commit()
         return True
+
+    def get_by_name(self, name: str) -> List[Category]:
+        """Recherche les catégories dont le nom contient 'name' (insensible à la casse)."""
+        return (
+            self.db.query(Category)
+            .filter(Category.name_category.ilike(f"%{name}%"))
+            .all()
+        )

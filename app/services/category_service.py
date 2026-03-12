@@ -59,3 +59,7 @@ class CategoryService:
         if not category:
             return False
         return self.repo.delete(category)
+
+    def get_by_name(self, name: str) -> List[Category]:
+        """Recherche les catégories dont le nom contient 'name' (insensible à la casse)."""
+        return self.repo.get_by_name(name)

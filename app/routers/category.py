@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from typing import List
 
@@ -54,3 +54,14 @@ def delete_category(category_id: int, db: Session = Depends(get_db)):
     if not success:
         raise HTTPException(status_code=404, detail="Category not found")
     return {"message": "Category deleted"}
+
+@router.get("/search/", response_model=List[CategoryRead])
+def search_categories(
+    name: str = Query(..., description="Nom ou partie du nom de la catégorie"), 
+    db: Session = Depends(get_db)
+):
+    service = CategoryService(db)
+    categories = service.get_by_name(name)
+    if not categories:
+        raise HTTPException(status_code=404, detail="No categories found with this name")
+    return categories
