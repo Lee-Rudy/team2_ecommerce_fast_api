@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from app.routers.Category import router as category_router
+from app.routers.category import router as category_router
+from app.routers.route_product import router as product_router
 
 app = FastAPI(
     title="Team2 E-commerce API",
@@ -8,6 +9,7 @@ app = FastAPI(
 
 # Inclure les routers
 app.include_router(category_router)
+app.include_router(product_router)
 
 def build_status() -> dict[str, str]:
     return {"status": "ok"}

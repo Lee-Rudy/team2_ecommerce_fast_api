@@ -1,7 +1,7 @@
 from typing import List, Optional
 from sqlalchemy.orm import Session
-from app.models.Category import Category
-from app.repositories.CategoryRepo import CategoryRepo
+from app.models.category import Category
+from app.repositories.category_repo import CategoryRepo
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime

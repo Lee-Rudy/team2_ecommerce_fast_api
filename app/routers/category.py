@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 from typing import List
 
 from app.database import SessionLocal
-from app.services.CategoryService import CategoryService, CategoryCreate, CategoryUpdate, CategoryRead
-from app.models.Category import Category
+from app.services.category_service import CategoryService, CategoryCreate, CategoryUpdate, CategoryRead
+from app.models.category import Category
 
 router = APIRouter(
     prefix="/categories",

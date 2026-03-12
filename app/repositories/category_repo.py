@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from typing import List, Optional
-from app.models.Category import Category
+from app.models.category import Category
 
 class CategoryRepo:
     """Accès aux données Category."""

@@ -1,25 +1,71 @@
-import datetime
-from pydantic import BaseModel
-"""Represents a product.
+from datetime import datetime
+from typing import Optional
 
-    This model defines the structure of a product.
+from pydantic import BaseModel, Field
+from sqlalchemy import Column, Integer, String, Float, DateTime
+from app.database import Base
+
+
+class Product(Base):
+    """SQLAlchemy model representing a product in the catalog.
+
+    This model defines the database table used to store product
+    information in the e-commerce inventory system.
 
     Attributes:
         id_product (int): Unique identifier of the product.
         product_name (str): Name of the product.
-        product_description (str): Detailed description of the product.
+        product_description (str): Description of the product.
         brand (str): Brand or manufacturer of the product.
         price (float): Price of the product.
-        stock_quantity (int): Available quantity of the product in stock.
-        created_at (datetime): Date and time when the product was created.
-        updated_at (datetime): Date and time when the product was last updated.
-"""
-class Product(BaseModel):
-    id_product: int
-    product_name: str
-    product_description: str
+        stock_quantity (int): Available quantity in stock.
+        created_at (datetime): Timestamp when the product was created.
+        updated_at (datetime): Timestamp when the product was last updated.
+    """
+
+    __tablename__ = "products"
+
+    id_product = Column(Integer, primary_key=True, index=True)
+    product_name = Column(String, nullable=False, index=True)
+    product_description = Column(String, nullable=False)
+    brand = Column(String, nullable=False)
+    price = Column(Float, nullable=False)
+    stock_quantity = Column(Integer, nullable=False)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=None, onupdate=datetime.utcnow)
+
+class ProductBase(BaseModel):
+    """Base schema for product data."""
+
+    product_name: str = Field(..., min_length=2, max_length=100)
+    product_description: Optional[str] = None
     brand: str
-    price: float
-    stock_quantity: int
-    created_at: datetime.datetime
-    updated_at: datetime.datetime
+    price: float = Field(..., gt=0)
+    stock_quantity: int = Field(..., ge=0)
+
+
+class ProductCreate(ProductBase):
+    """Schema used when creating a product."""
+    pass
+
+
+class ProductUpdate(BaseModel):
+    """Schema used when updating a product."""
+
+    product_name: Optional[str] = None
+    product_description: Optional[str] = None
+    brand: Optional[str] = None
+    price: Optional[float] = None
+    stock_quantity: Optional[int] = None
+
+
+class ProductResponse(ProductBase):
+    """Schema returned in API responses."""
+
+    id_product: int
+    created_at: datetime
+    updated_at: Optional[datetime]
+
+    class Config:
+        from_attributes = True
