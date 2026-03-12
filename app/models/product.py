@@ -14,8 +14,8 @@ class Product(Base):
 
     Attributes:
         id_product (int): Unique identifier of the product.
-        product_name (str): Name of the product.
-        product_description (str): Description of the product.
+        name_product (str): Name of the product.
+        description_product (str): Description of the product.
         brand (str): Brand or manufacturer of the product.
         price (float): Price of the product.
         stock_quantity (int): Available quantity in stock.
@@ -26,8 +26,8 @@ class Product(Base):
     __tablename__ = "products"
 
     id_product = Column(Integer, primary_key=True, index=True)
-    product_name = Column(String, nullable=False, index=True)
-    product_description = Column(String, nullable=False)
+    name_product = Column(String, nullable=False, index=True)
+    description_product = Column(String, nullable=False)
     brand = Column(String, nullable=False)
     price = Column(Float, nullable=False)
     stock_quantity = Column(Integer, nullable=False)
@@ -38,8 +38,8 @@ class Product(Base):
 class ProductBase(BaseModel):
     """Base schema for product data."""
 
-    product_name: str = Field(..., min_length=2, max_length=100)
-    product_description: Optional[str] = None
+    name_product: str = Field(..., min_length=2, max_length=100)
+    description_product: Optional[str] = None
     brand: str
     price: float = Field(..., gt=0)
     stock_quantity: int = Field(..., ge=0)
@@ -53,8 +53,8 @@ class ProductCreate(ProductBase):
 class ProductUpdate(BaseModel):
     """Schema used when updating a product."""
 
-    product_name: Optional[str] = None
-    product_description: Optional[str] = None
+    name_product: Optional[str] = None
+    description_product: Optional[str] = None
     brand: Optional[str] = None
     price: Optional[float] = None
     stock_quantity: Optional[int] = None
