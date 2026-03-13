@@ -3,9 +3,10 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 from sqlalchemy import Column, Integer, String, Float, DateTime
-from app.database import Base
 from sqlalchemy.orm import relationship
+from app.database import Base
 
+from app.models.product_category import product_categories
 
 class Product(Base):
     """SQLAlchemy model representing a product in the catalog.
@@ -22,25 +23,34 @@ class Product(Base):
         stock_quantity (int): Available quantity in stock.
         created_at (datetime): Timestamp when the product was created.
         updated_at (datetime): Timestamp when the product was last updated.
+        categories: Relationship to categories through product_categories table.
     """
 
     __tablename__ = "products"
 
     id_product = Column(Integer, primary_key=True, index=True)
     name_product = Column(String, nullable=False, index=True)
-    description_product = Column(String, nullable=False)
+    description_product = Column(String, nullable=True)
     brand = Column(String, nullable=False)
-    price = Column(Float, nullable=False)
-    stock_quantity = Column(Integer, nullable=False)
+    price = Column(Float, nullable=False, index=True)
+    stock_quantity = Column(Integer, nullable=False, default=0, index=True)
 
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=None, onupdate=datetime.utcnow)
 
+    # Relationships
     stock_movements = relationship(
-    "StockMovement",
-    back_populates="product",
-    cascade="all, delete"
+        "StockMovement",
+        back_populates="product",
+        cascade="all, delete"
     )
+    
+    categories = relationship(
+        "Category",
+        secondary=product_categories,
+        back_populates="products"
+    )
+
 
 class ProductBase(BaseModel):
     """Base schema for product data."""
@@ -54,7 +64,7 @@ class ProductBase(BaseModel):
 
 class ProductCreate(ProductBase):
     """Schema used when creating a product."""
-    pass
+    category_ids: Optional[list[int]] = Field(default=[], description="List of category IDs")
 
 
 class ProductUpdate(BaseModel):
@@ -65,6 +75,18 @@ class ProductUpdate(BaseModel):
     brand: Optional[str] = None
     price: Optional[float] = None
     stock_quantity: Optional[int] = None
+    category_ids: Optional[list[int]] = None
+
+
+class CategorySchema(BaseModel):
+    """Schema for category information in product response."""
+    
+    id_category: int
+    name_category: str
+    description_category: Optional[str] = None
+
+    class Config:
+        from_attributes = True
 
 
 class ProductResponse(ProductBase):
@@ -73,6 +95,7 @@ class ProductResponse(ProductBase):
     id_product: int
     created_at: datetime
     updated_at: Optional[datetime]
+    categories: list[CategorySchema] = []
 
     class Config:
         from_attributes = True

@@ -1,8 +1,10 @@
 from datetime import datetime
 
 from sqlalchemy import Column, DateTime, Integer, String
+from sqlalchemy.orm import relationship
 
 from app.database import Base
+from app.models.product_category import product_categories
 
 
 class Category(Base):
@@ -16,6 +18,12 @@ class Category(Base):
     description_category = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=None, onupdate=datetime.utcnow)
+
+    products = relationship(
+        "Product",
+        secondary=product_categories,
+        back_populates="categories"
+    )
 
     # Pydantic config pour validation et sérialisation
     model_config = {

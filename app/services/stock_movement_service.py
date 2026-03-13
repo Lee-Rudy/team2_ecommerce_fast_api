@@ -53,3 +53,8 @@ class StockMovementService:
         db.refresh(movement)
 
         return movement
+
+    @staticmethod
+    def get_all_movements(db: Session):
+        """Get all stock movements."""
+        return StockMovementRepository.get_all(db)

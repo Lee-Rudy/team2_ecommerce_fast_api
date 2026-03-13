@@ -35,3 +35,8 @@ def create_stock_movement(
     db: Session = Depends(get_db)
 ):
     return StockMovementService.create_stock_movement(db, movement)
+
+@router.get("/", response_model=list[StockMovementResponse])
+def get_all_movements(db: Session = Depends(get_db)):
+    """Get all stock movements (most recent first)."""
+    return StockMovementService.get_all_movements(db)
