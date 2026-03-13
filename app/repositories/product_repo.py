@@ -23,6 +23,39 @@ class ProductRepository:
         return db.query(Product).all()
 
     @staticmethod
+    def search_by_name(db: Session, name: str):
+        """Search products by name."""
+        return db.query(Product).filter(
+            Product.name_product.ilike(f"%{name}%")
+        ).all()
+
+    @staticmethod
+    def filter_products(
+            db: Session,
+            category_id: int | None = None,
+            min_price: float | None = None,
+            max_price: float | None = None,
+            in_stock: bool | None = None
+    ):
+        """Filter products according to given parameters."""
+
+        query = db.query(Product)
+
+        if category_id:
+            query = query.filter(Product.category_id == category_id)
+
+        if min_price:
+            query = query.filter(Product.price >= min_price)
+
+        if max_price:
+            query = query.filter(Product.price <= max_price)
+
+        if in_stock:
+            query = query.filter(Product.stock_quantity > 0)
+
+        return query.all()
+
+    @staticmethod
     def get_by_id(db: Session, product_id: int):
         """Retrieve a product by its ID."""
         return (

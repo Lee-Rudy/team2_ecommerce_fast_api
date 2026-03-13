@@ -3,8 +3,9 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 from sqlalchemy import Column, Integer, String, Float, DateTime
+from sqlalchemy.orm import relationship
 from app.database import Base
-
+from app.models.product_category import product_categories
 
 class Product(Base):
     """SQLAlchemy model representing a product in the catalog.
@@ -35,6 +36,12 @@ class Product(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=None, onupdate=datetime.utcnow)
 
+    categories = relationship(
+        "Category",
+        secondary=product_categories,
+        back_populates="products"
+    )
+
 class ProductBase(BaseModel):
     """Base schema for product data."""
 
@@ -44,6 +51,7 @@ class ProductBase(BaseModel):
     price: float = Field(..., gt=0)
     stock_quantity: int = Field(..., ge=0)
 
+    category_id: Optional[int] = None
 
 class ProductCreate(ProductBase):
     """Schema used when creating a product."""

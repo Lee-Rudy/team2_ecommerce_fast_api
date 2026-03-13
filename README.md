@@ -56,25 +56,16 @@ team2_ecommerce_fast_api/
 
 Cloner le projet :
 
-<<<<<<< HEAD
 ```
 git clone https://github.com/Lee-Rudy/team2_ecommerce_fast_api.git
-=======
-
-git clone git@github.com:Lee-Rudy/team2_ecommerce_fast_api.git
->>>>>>> 146c0b22568b1c4f18dddd4a1f662733d73e6400
 cd team2_ecommerce_fast_api
-
 ```
+
 Installer les dépendances :
-<<<<<<< HEAD
+
 ```bash
 poetry install
 ```
-=======
-
-poetry install
->>>>>>> 146c0b22568b1c4f18dddd4a1f662733d73e6400
 
 Lancer l'application :
 ```bash
@@ -94,20 +85,15 @@ http://localhost:8000/docs
 Lancer le projet avec Docker
 Construire et démarrer le conteneur :
 
-<<<<<<< HEAD
 ```
 docker compose up --build
 ```
-=======
-# Docker set-up 
-docker compose up --build
-docker compose down
->>>>>>> 146c0b22568b1c4f18dddd4a1f662733d73e6400
+
+# Docker set-up
 
 L’API sera accessible sur :
 ```
 http://localhost:8000
-<<<<<<< HEAD
 ```
 
 ---
@@ -116,12 +102,10 @@ http://localhost:8000
 =======
 
 Docker Image (CI/CD)
->>>>>>> 146c0b22568b1c4f18dddd4a1f662733d73e6400
 
 Le pipeline GitHub Actions construit automatiquement une image Docker et la publie sur Docker Hub à chaque push sur main.
 
 Docker Hub repository :
-<<<<<<< HEAD
 ```
 https://hub.docker.com/r/geraldinefrancois/team2_ecommerce_fast_api
 ```
@@ -141,21 +125,6 @@ docker run -p 8000:8000 geraldinefrancois/team2_ecommerce_fast_api:latest
 ---
 
 # Tests
-=======
-
-https://hub.docker.com/r/geraldinefrancois/team2_ecommerce_fast_api
-
-Image la plus récente :
-
-geraldinefrancois/team2_ecommerce_fast_api:latest
-
-Télécharger et exécuter l'image :
-
-docker pull geraldinefrancois/team2_ecommerce_fast_api:latest
-docker run -p 8000:8000 geraldinefrancois/team2_ecommerce_fast_api:latest
-
-Tests
->>>>>>> 146c0b22568b1c4f18dddd4a1f662733d73e6400
 
 Exécuter les tests :
 ```
@@ -182,19 +151,9 @@ poetry run mypy .
 
 - la qualité du code (flake8, black, mypy)
 
-<<<<<<< HEAD
 - l’exécution des tests
 
 - la couverture de tests (≥ 80%)
-=======
-la couverture de tests (≥ 80%)
-
-la construction de l’image Docker
-
-la publication de l’image sur Docker Hub
-
-Le pipeline s’exécute à chaque push et pull request.
->>>>>>> 146c0b22568b1c4f18dddd4a1f662733d73e6400
 
 - la construction de l’image Docker
 
@@ -217,7 +176,6 @@ ReDoc :
 ```
 ---
 
-<<<<<<< HEAD
 # Auteur
 
 Projet réalisé par **Team2** dans le cadre du module Developpement Avance.
@@ -226,8 +184,3 @@ Projet réalisé par **Team2** dans le cadre du module Developpement Avance.
 - [@Lee-Rudy](https://github.com/Lee-Rudy)
 - [@fehiz77](https://github.com/fehiz77)
 - [@AmbiNtsoah](https://github.com/AmbiNtsoah)
-=======
-Projet réalisé par l’équipe Team2 dans le cadre du module d’industrialisation logicielle.
-
-
->>>>>>> 146c0b22568b1c4f18dddd4a1f662733d73e6400

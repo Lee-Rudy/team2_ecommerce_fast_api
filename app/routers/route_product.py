@@ -25,6 +25,28 @@ def get_products(db: Session = Depends(get_db)):
     """Retrieve all products."""
     return ProductService.get_all_products(db)
 
+@router.get("/search")
+def search_products(name: str, db: Session = Depends(get_db)):
+    """Search products by name."""
+    return ProductService.search_products(db, name)
+
+@router.get("/filter")
+def filter_products(
+    category_id: int | None = None,
+    min_price: float | None = None,
+    max_price: float | None = None,
+    in_stock: bool | None = None,
+    db: Session = Depends(get_db)
+):
+    """Filter products according to parameters."""
+    return ProductService.filter_products(
+        db,
+        category_id,
+        min_price,
+        max_price,
+        in_stock
+    )
+
 @router.get("/{product_id}", response_model=ProductResponse, summary="Get product by ID")
 def get_product(product_id: int, db: Session = Depends(get_db)):
     """Retrieve a single product by its ID."""

@@ -32,6 +32,22 @@ class ProductService:
         return product
 
     @staticmethod
+    def search_products(db: Session, name: str):
+        """Search products by name."""
+        return ProductRepository.search_by_name(db, name)
+
+    @staticmethod
+    def filter_products(db: Session, category_id=None, min_price=None, max_price=None, in_stock=None):
+        """Filter products."""
+        return ProductRepository.filter_products(
+            db,
+            category_id,
+            min_price,
+            max_price,
+            in_stock
+        )
+
+    @staticmethod
     def update_product(
         db: Session,
         product_id: int,
