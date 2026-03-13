@@ -45,12 +45,14 @@ class StockMovementService:
             raise HTTPException(status_code=400, detail="Quantity must be > 0")
 
         if data.movement_type == "IN":
-            product.stock_quantity += data.quantity
+            new_qty = product.stock_quantity + data.quantity
+            setattr(product, "stock_quantity", new_qty)
 
         elif data.movement_type == "OUT":
             if product.stock_quantity < data.quantity:
                 raise HTTPException(status_code=400, detail="Insufficient stock")
-            product.stock_quantity -= data.quantity
+            new_qty = product.stock_quantity - data.quantity
+            setattr(product, "stock_quantity", new_qty)
 
         else:
             raise HTTPException(status_code=400, detail="Invalid movement type")

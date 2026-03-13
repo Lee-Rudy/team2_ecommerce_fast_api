@@ -165,9 +165,7 @@ class ProductRepository:
         db.commit()
 
     @staticmethod
-    def add_category_to_product(
-        db: Session, product_id: int, category_id: int
-    ) -> Product:
+    def add_category_to_product(db: Session, product_id: int, category_id: int):
         """Add a category to an existing product.
 
         Args:
@@ -193,9 +191,7 @@ class ProductRepository:
         return product
 
     @staticmethod
-    def remove_category_from_product(
-        db: Session, product_id: int, category_id: int
-    ) -> Product:
+    def remove_category_from_product(db: Session, product_id: int, category_id: int):
         """Remove a category from a product.
 
         Args:

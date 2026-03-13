@@ -125,9 +125,11 @@ class CategoryService:
         if not category:
             return None
         if category_data.name_category is not None:
-            category.name_category = category_data.name_category
+            setattr(category, "name_category", category_data.name_category)
         if category_data.description_category is not None:
-            category.description_category = category_data.description_category
+            setattr(
+                category, "description_category", category_data.description_category
+            )
         return self.repo.update(category)
 
     def delete(self, category_id: int) -> bool:
