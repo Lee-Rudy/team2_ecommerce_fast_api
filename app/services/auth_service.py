@@ -3,7 +3,7 @@ from jose import jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
-from app.repositories.user_repo import UserRepository
+from app.repositories.UserRepo import UserRepo as UserRepository
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -61,7 +61,8 @@ class AuthService:
             Tuple containing user and token if authentication succeeds.
         """
 
-        user = UserRepository.get_by_username(db, username)
+        repo = UserRepository(db)
+        user = repo.get_by_username(username)
 
         if not user:
             return None

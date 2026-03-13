@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from app.routers.category import router as category_router
 from app.routers.route_product import router as product_router
 from app.routers.route_auth import router as auth_router
+from app.routers.User import router as user_router
 
 app = FastAPI(
     title="Team2 E-commerce API",
@@ -12,6 +13,7 @@ app = FastAPI(
 app.include_router(category_router)
 app.include_router(product_router)
 app.include_router(auth_router)
+app.include_router(user_router)
 
 def build_status() -> dict[str, str]:
     return {"status": "ok"}
