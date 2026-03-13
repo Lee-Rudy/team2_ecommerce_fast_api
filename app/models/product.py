@@ -4,6 +4,7 @@ from typing import Optional
 from pydantic import BaseModel, Field
 from sqlalchemy import Column, Integer, String, Float, DateTime
 from app.database import Base
+from sqlalchemy.orm import relationship
 
 
 class Product(Base):
@@ -34,6 +35,12 @@ class Product(Base):
 
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=None, onupdate=datetime.utcnow)
+
+    stock_movements = relationship(
+    "StockMovement",
+    back_populates="product",
+    cascade="all, delete"
+    )
 
 class ProductBase(BaseModel):
     """Base schema for product data."""
