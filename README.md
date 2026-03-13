@@ -77,7 +77,9 @@ http://localhost:8000/docs
 
 Construire et démarrer les conteneurs :
 
+# Docker set-up
 docker compose up --build
+docker compose down
 
 L’API sera disponible sur :
 
@@ -137,4 +139,4 @@ ReDoc
 /redoc
 👥 Auteur
 
-Projet réalisé par Team2 dans le cadre du module d’industrialisation logicielle.
+Projet réalisé par l’équipe Team2 dans le cadre du module d’industrialisation logicielle.
