@@ -63,7 +63,5 @@ def test_delete_user_not_found():
 
 def test_update_user_role_permission_error():
     """Test update role utilisateur sans permission."""
-    response = client.put(
-        "/users/1", json={"role": 2}, headers={"x-role": "1"}
-    )
+    response = client.put("/users/1", json={"role": 2}, headers={"x-role": "1"})
     assert response.status_code in [403, 404]

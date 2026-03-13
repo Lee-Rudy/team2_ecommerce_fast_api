@@ -21,9 +21,7 @@ def test_product_base_valid():
 def test_product_base_invalid_price():
     """Test ProductBase rejette prix négatif."""
     with pytest.raises(ValidationError):
-        ProductBase(
-            name_product="Test", brand="Brand", price=-10.0, stock_quantity=5
-        )
+        ProductBase(name_product="Test", brand="Brand", price=-10.0, stock_quantity=5)
 
 
 def test_product_create_with_categories():

@@ -55,9 +55,7 @@ def test_complete_product_workflow():
             get_resp = client.get(f"/products/{prod_id}")
             assert get_resp.status_code == 200
 
-            update_resp = client.put(
-                f"/products/{prod_id}", json={"price": 149.99}
-            )
+            update_resp = client.put(f"/products/{prod_id}", json={"price": 149.99})
             assert update_resp.status_code == 200
 
             stock_in = client.post(
