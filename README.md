@@ -1,4 +1,6 @@
-# 🛒 Team2 E-commerce FastAPI
+# 🛒 E-commerce ShopAPI
+
+---
 
 API e-commerce développée avec **FastAPI**, **Poetry** et **Docker** dans le cadre du module d’**industrialisation logicielle**.
 
@@ -30,7 +32,7 @@ Ce projet met en place une **architecture backend moderne** avec :
 
 # 📁 Structure du projet
 
-
+```
 team2_ecommerce_fast_api/
 │
 ├── app/
@@ -51,10 +53,10 @@ team2_ecommerce_fast_api/
 │
 ├── .github/
 │ └── workflows/
-│ └── ci.yml
+│    └── ci.yml
 │
 └── README.md
-
+```
 
 ---
 
@@ -62,81 +64,99 @@ team2_ecommerce_fast_api/
 
 ### 1️⃣ Cloner le projet
 
+<<<<<<< HEAD
+```
+git clone https://github.com/Lee-Rudy/team2_ecommerce_fast_api.git
+=======
 
 git clone git@github.com:Lee-Rudy/team2_ecommerce_fast_api.git
+>>>>>>> 146c0b22568b1c4f18dddd4a1f662733d73e6400
 cd team2_ecommerce_fast_api
-2️⃣ Installer les dépendances
-poetry install
-3️⃣ Lancer l'application
-poetry run uvicorn app.main:app --reload
-Accès à l’API
-http://localhost:8000
-Documentation interactive
-http://localhost:8000/docs
-🐳 Lancer le projet avec Docker
 
-Construire et démarrer les conteneurs :
+Installer les dépendances :
+
+poetry install
+
+Lancer l'application :
+
+poetry run uvicorn app.main:app --reload
+
+L’API sera accessible sur :
+
+http://localhost:8000
+
+Documentation interactive :
+
+http://localhost:8000/docs
+Lancer le projet avec Docker
+
+Construire et démarrer le conteneur :
 
 # Docker set-up
 docker compose up --build
 docker compose down
+>>>>>>> 146c0b22568b1c4f18dddd4a1f662733d73e6400
 
-L’API sera disponible sur :
+L’API sera accessible sur :
 
 http://localhost:8000
-📦 Docker Image (CI/CD)
 
-Le pipeline GitHub Actions construit automatiquement une image Docker et la publie sur Docker Hub à chaque push sur la branche main.
+Docker Image (CI/CD)
 
-Repository Docker Hub
+Le pipeline GitHub Actions construit automatiquement une image Docker et la publie sur Docker Hub à chaque push sur main.
+
+Docker Hub repository :
+
 https://hub.docker.com/r/geraldinefrancois/team2_ecommerce_fast_api
 Image la plus récente
 geraldinefrancois/team2_ecommerce_fast_api:latest
 Télécharger et exécuter l'image
 docker pull geraldinefrancois/team2_ecommerce_fast_api:latest
 docker run -p 8000:8000 geraldinefrancois/team2_ecommerce_fast_api:latest
-🧪 Tests
+
+Tests
 
 Exécuter les tests :
-
+```
 poetry run pytest
-🔎 Qualité du code
+Qualité du code
 
+# Qualité du code
 Vérifier la qualité du code :
 
+```
 poetry run flake8
 poetry run black --check .
 poetry run mypy .
-🔄 CI/CD
+CI/CD
 
-Le pipeline GitHub Actions vérifie automatiquement :
+### Le pipeline GitHub Actions vérifie automatiquement :
 
-installation des dépendances
+l’installation des dépendances
 
-qualité du code (flake8, black, mypy)
+la qualité du code (flake8, black, mypy)
 
-exécution des tests
+l’exécution des tests
 
-couverture de tests (≥ 80%)
+la couverture de tests (≥ 80%)
 
 construction de l’image Docker
 
 publication sur Docker Hub
 
-Le pipeline s’exécute automatiquement à chaque :
+Le pipeline s’exécute à chaque push et pull request.
 
-push
-
-pull request
-
-📚 Documentation API
+API Documentation
 
 FastAPI génère automatiquement la documentation :
 
-Swagger UI
+Swagger UI :
+
 /docs
-ReDoc
+
+ReDoc :
+
 /redoc
-👥 Auteur
+Auteur
 
 Projet réalisé par l’équipe Team2 dans le cadre du module d’industrialisation logicielle.
