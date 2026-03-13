@@ -151,7 +151,7 @@ poetry run mypy .
 
 - la qualité du code (flake8, black, mypy)
 
-- l’exécution des tests
+- l’exécution des testss
 
 - la couverture de tests (≥ 80%)
 
