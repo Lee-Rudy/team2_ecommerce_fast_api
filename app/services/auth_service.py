@@ -72,7 +72,8 @@ class AuthService:
         if not user:
             return None
 
-        if not AuthService.verify_password(password, user.password):
+        user_password = str(user.password)
+        if not AuthService.verify_password(password, user_password):
             return None
 
         token = AuthService.create_access_token(

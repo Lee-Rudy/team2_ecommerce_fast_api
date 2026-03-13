@@ -150,15 +150,15 @@ class UserService:
         if not user:
             return None
         if user_data.username is not None:
-            user.username = user_data.username
+            setattr(user, "username", user_data.username)
         if user_data.email is not None:
-            user.email = user_data.email
+            setattr(user, "email", user_data.email)
         if user_data.password is not None:
-            user.password = pwd_context.hash(user_data.password)
+            setattr(user, "password", pwd_context.hash(user_data.password))
         if user_data.role is not None:
             if requester_role < 2:
                 raise PermissionError("Seul un superadmin peut modifier le rôle.")
-            user.role = user_data.role
+            setattr(user, "role", user_data.role)
         return self.repo.update(user)
 
     def delete(self, user_id: int) -> bool:
