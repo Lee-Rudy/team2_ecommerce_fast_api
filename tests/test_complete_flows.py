@@ -31,8 +31,12 @@ def test_complete_category_workflow():
 
 def test_complete_product_workflow():
     """Test workflow complet produit."""
+    import uuid
+
+    unique_name = f"FlowCat_{uuid.uuid4().hex[:8]}"
     cat_resp = client.post(
-        "/categories/", json={"name_category": "FlowCat", "description_category": "D"}
+        "/categories/",
+        json={"name_category": unique_name, "description_category": "D"},
     )
 
     if cat_resp.status_code in [200, 201]:
