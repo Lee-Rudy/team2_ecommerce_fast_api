@@ -5,7 +5,7 @@ from passlib.context import CryptContext
 from pydantic import BaseModel, EmailStr
 from sqlalchemy.orm import Session
 
-from app.models.User import User
+from app.models.user import User
 from app.repositories.UserRepo import UserRepo
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
