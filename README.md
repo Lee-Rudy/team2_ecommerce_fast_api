@@ -64,13 +64,8 @@ team2_ecommerce_fast_api/
 
 ### 1️⃣ Cloner le projet
 
-<<<<<<< HEAD
-```
-git clone https://github.com/Lee-Rudy/team2_ecommerce_fast_api.git
-=======
 
 git clone git@github.com:Lee-Rudy/team2_ecommerce_fast_api.git
->>>>>>> 146c0b22568b1c4f18dddd4a1f662733d73e6400
 cd team2_ecommerce_fast_api
 
 Installer les dépendances :
