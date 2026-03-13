@@ -1,15 +1,16 @@
+"""User management router module.
+
+This module provides API endpoints for user CRUD operations
+with role-based access control.
+"""
+
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Header
 from sqlalchemy.orm import Session
 
 from app.database import SessionLocal
-from app.services.UserService import (
-    UserService,
-    UserCreate,
-    UserUpdate,
-    UserRead,
-)
+from app.services.UserService import UserCreate, UserRead, UserService, UserUpdate
 
 router = APIRouter(
     prefix="/users",
@@ -18,7 +19,11 @@ router = APIRouter(
 
 
 def get_db():
-    """Fournit une session DB pour les endpoints FastAPI."""
+    """Provide database session for dependency injection.
+
+    Yields:
+        SQLAlchemy database session.
+    """
     db = SessionLocal()
     try:
         yield db
@@ -27,9 +32,18 @@ def get_db():
 
 
 def require_admin(x_role: int = Header(...)):
-    """
-    Guard : l'appelant doit être admin (role >= 1) ou superadmin (role >= 2).
-    En production, remplacer ce header par un token JWT vérifié.
+    """Require admin or superadmin role (role >= 1).
+
+    In production, replace this header with JWT token verification.
+
+    Args:
+        x_role: Role level from request header.
+
+    Returns:
+        Role level if authorized.
+
+    Raises:
+        HTTPException: 403 if role is insufficient.
     """
     if x_role < 1:
         raise HTTPException(status_code=403, detail="Accès réservé aux admins.")
@@ -37,20 +51,36 @@ def require_admin(x_role: int = Header(...)):
 
 
 def require_superadmin(x_role: int = Header(...)):
-    """Guard : l'appelant doit être superadmin (role == 2)."""
+    """Require superadmin role (role == 2).
+
+    Args:
+        x_role: Role level from request header.
+
+    Returns:
+        Role level if authorized.
+
+    Raises:
+        HTTPException: 403 if not superadmin.
+    """
     if x_role < 2:
         raise HTTPException(status_code=403, detail="Accès réservé aux superadmins.")
     return x_role
 
-
-# --- Endpoints CRUD ---
 
 @router.get("/", response_model=List[UserRead])
 def read_users(
     db: Session = Depends(get_db),
     role: int = Depends(require_admin),
 ):
-    """[Admin+] Retourne tous les utilisateurs."""
+    """Retrieve all users (Admin+ only).
+
+    Args:
+        db: Database session (injected).
+        role: User role from header (injected).
+
+    Returns:
+        List of all users.
+    """
     service = UserService(db)
     return service.get_all()
 
@@ -61,7 +91,19 @@ def read_user(
     db: Session = Depends(get_db),
     role: int = Depends(require_admin),
 ):
-    """[Admin+] Retourne un utilisateur par son ID."""
+    """Retrieve a single user by ID (Admin+ only).
+
+    Args:
+        user_id: ID of the user to retrieve.
+        db: Database session (injected).
+        role: User role from header (injected).
+
+    Returns:
+        User object.
+
+    Raises:
+        HTTPException: 404 if user not found.
+    """
     service = UserService(db)
     user = service.get_by_id(user_id)
     if not user:
@@ -75,7 +117,16 @@ def create_user(
     db: Session = Depends(get_db),
     role: int = Depends(require_superadmin),
 ):
-    """[Superadmin] Crée un nouvel utilisateur."""
+    """Create a new user (Superadmin only).
+
+    Args:
+        user: User creation data.
+        db: Database session (injected).
+        role: User role from header (injected).
+
+    Returns:
+        Created user object.
+    """
     service = UserService(db)
     return service.create(user)
 
@@ -87,9 +138,21 @@ def update_user(
     db: Session = Depends(get_db),
     role: int = Depends(require_admin),
 ):
-    """
-    [Admin+] Met à jour un utilisateur.
-    La modification du rôle est réservée au superadmin.
+    """Update an existing user (Admin+ only).
+
+    Role modification requires superadmin privileges.
+
+    Args:
+        user_id: ID of the user to update.
+        user: Updated user data.
+        db: Database session (injected).
+        role: User role from header (injected).
+
+    Returns:
+        Updated user object.
+
+    Raises:
+        HTTPException: 403 if insufficient privileges, 404 if user not found.
     """
     service = UserService(db)
     try:
@@ -107,7 +170,19 @@ def delete_user(
     db: Session = Depends(get_db),
     role: int = Depends(require_superadmin),
 ):
-    """[Superadmin] Supprime un utilisateur par son ID."""
+    """Delete a user (Superadmin only).
+
+    Args:
+        user_id: ID of the user to delete.
+        db: Database session (injected).
+        role: User role from header (injected).
+
+    Returns:
+        Success message.
+
+    Raises:
+        HTTPException: 404 if user not found.
+    """
     service = UserService(db)
     success = service.delete(user_id)
     if not success:
